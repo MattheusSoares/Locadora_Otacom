@@ -1,0 +1,43 @@
+﻿<div class="row">
+    <div class="col-md-12">
+
+
+        <div class="col-md-12" style="margin-left:30%">
+            <h2>Cadastro de Cliente</h2>
+            <form role="form" action="/Cliente/Create/" method="post">
+
+                <div class="form-group">
+
+                    <label for="InputNome">
+                        Digite seu nome
+                    </label>
+                    <input type="text" minlength="5" maxlength="50" name="nome" class="form-control" id="nome" style="width: 100%" required />
+                </div>
+
+                <div class="form-group">
+
+                    <label for="InputLogin">
+                        Digite seu Login
+                    </label>
+                    <input type="text" minlength="3" maxlength="50" name="login" class="form-control" id="login" required />
+                </div>
+
+                <div class="form-group">
+
+                    <label for="InputPassword">
+                        Digite sua senha
+                    </label>
+                    <input type="password" minlength="3" maxlength="50" name="senha" class="form-control" id="senha" required />
+                </div>
+
+                <div style="margin-left:10%; padding-top: 15px">
+                    <button type="submit" class="btn btn-primary">
+                        Cadastrar
+                    </button>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+</div>

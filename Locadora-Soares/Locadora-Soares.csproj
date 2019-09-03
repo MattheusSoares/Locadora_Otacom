@@ -34,6 +34,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -43,8 +44,12 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.1</LangVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.2.0.4\lib\netstandard2.0\Dapper.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -126,10 +131,19 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ClienteController.cs" />
+    <Compile Include="Controllers\FilmeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Admin.cs" />
+    <Compile Include="Models\Cliente.cs" />
+    <Compile Include="Models\Filme.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Persistence\AdminDAO.cs" />
+    <Compile Include="Persistence\ClienteDAO.cs" />
+    <Compile Include="Persistence\FilmeDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -168,10 +182,33 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Filme\Index.cshtml" />
+    <Content Include="Views\Cliente\Index.cshtml" />
+    <Content Include="Views\Cliente\Cadastrar.cshtml" />
+    <Content Include="Views\Cliente\CadastroSucesso.cshtml" />
+    <Content Include="Views\Cliente\ErroLogin.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\ErroLogin.cshtml" />
+    <Content Include="Views\Admin\AdminMain.cshtml" />
+    <Content Include="Views\Admin\CadastrarCliente.cshtml" />
+    <Content Include="Views\Admin\CadastroClienteSucesso.cshtml" />
+    <Content Include="Views\Admin\ListarCliente.cshtml" />
+    <Content Include="Views\Admin\ExcluirCliente.cshtml" />
+    <Content Include="Views\Admin\EditarCliente.cshtml" />
+    <Content Include="Views\Admin\EditarClienteSucesso.cshtml" />
+    <Content Include="Views\Admin\CadastrarFilme.cshtml" />
+    <Content Include="Views\Admin\CadastroFilmeSucesso.cshtml" />
+    <Content Include="Views\Admin\ListarFilme.cshtml" />
+    <Content Include="Views\Admin\EditarFilme.cshtml" />
+    <Content Include="Views\Admin\ExcluirFilme.cshtml" />
+    <Content Include="Views\Admin\EditarFilmeSucesso.cshtml" />
+    <Content Include="Views\Cliente\EditarPerfil.cshtml" />
+    <Content Include="Views\Admin\ListarFilmesCliente.cshtml" />
+    <Content Include="Views\Admin\DevolucaoFilme.cshtml" />
+    <Content Include="Views\Cliente\FilmesAlugados.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

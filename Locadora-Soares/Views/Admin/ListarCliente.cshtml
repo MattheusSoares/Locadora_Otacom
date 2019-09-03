@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Locadora_Soares.Models.Cliente>
+
+<div class="row">
+    <div class="col-md-12">
+        <h2 align="center">Clientes Cadastrados</h2>
+        <br /><br /><br />
+        <table class="table" align="center">
+            <thead>
+                <tr>
+                    <th>
+                        Nome
+                    </th>
+                    <th>
+                        Login
+                    </th>
+                    <th>
+                        Senha
+                    </th>
+                    <th colspan="2">
+                        Ações
+                    </th>
+                    <th>
+                        Filmes Alugados
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (!Model.Any())
+                {
+                    <tr>
+                        <td colspan="6" align="center">
+                            Não existem clientes cadastrados
+                        </td>
+                    </tr>
+
+                }
+                else
+                {
+
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nome)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Login)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Senha)
+                            </td>
+                            <td>
+                                <a role="button" class="btn btn-primary" href="/Admin/EditarCliente/@Html.DisplayFor(modelItem => item.ID)">
+                                    Editar
+                                </a>
+                            </td>
+                            <td>
+                                <a role="button" class="btn btn-primary" href="/Admin/ExcluirCliente/@Html.DisplayFor(modelItem => item.ID)">
+                                    Excluir
+                                </a>
+                            </td>
+                            <td>
+                                <a role="button" class="btn btn-primary" href="/Admin/ListarFilmesCliente/@Html.DisplayFor(modelItem => item.ID)">
+                                    Listar Filmes Alugados
+                                </a>
+                            </td>
+                        </tr>
+                    }
+
+                }
+                </tbody>
+        </table>
+
+        <div align="center">
+            <a role="button" class="btn btn-primary" href="/Admin/AdminMain/">
+                Voltar
+            </a>
+        </div>
+    </div>
+</div>

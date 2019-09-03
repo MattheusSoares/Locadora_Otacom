@@ -1,0 +1,93 @@
+﻿@model IEnumerable<Locadora_Soares.Models.Filme>
+
+<div class="row">
+    <div class="col-md-12" align="center">
+        <h4>Index do Cliente</h4>
+        <h5>Bem vindo @ViewBag.Nome</h5>
+
+        <br /><br /><br />
+
+        <div>
+            <a role="button" class="btn btn-primary" href="/Cliente/EditarPerfil/@ViewBag.ID">
+                Editar Perfil
+            </a>
+        </div>
+
+        <br />
+
+        <div>
+            <a role="button" class="btn btn-primary" href="/Cliente/FilmesAlugados/@ViewBag.ID">
+                Meus Filmes Alugados
+            </a>
+        </div>
+
+        <br /><br /><br />
+
+        <div>
+            <h2 align="center">Filmes Disponíveis</h2>
+            <br /><br /><br />
+            <table class="table" align="center">
+                <thead>
+                    <tr>
+                        <th>
+                            Título
+                        </th>
+                        <th>
+                            Ano
+                        </th>
+                        <th>
+                            Categoria
+                        </th>
+                        <th>
+                            Ação
+                        </th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (!Model.Any())
+                    {
+                        <tr>
+                            <td colspan="4" align="center">
+                                Não existem filmes disponíveis
+                            </td>
+                        </tr>
+
+                    }
+                    else
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Nome)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Ano)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Categoria)
+                                </td>
+                                <td>
+                                    <form action="/Cliente/AlugarFilme/" method="post">
+                                        <input type="hidden" name="ID" id="ID" value="@Html.DisplayFor(modelItem => item.ID)" />
+                                        <input type="hidden" name="nome" id="nome" value="@Html.DisplayFor(modelItem => item.Nome)" />
+                                        <input type="hidden" name="ano" id="ano" value="@Html.DisplayFor(modelItem => item.Ano)" />
+                                        <input type="hidden" name="categoria" id="categoria" value="@Html.DisplayFor(modelItem => item.Categoria)" />
+                                        <input type="hidden" name="ID_Cliente" id="ID_Cliente" value="@ViewBag.ID" />
+                                        <input type="submit" class="btn btn-primary" name="alugar" id="alugar" value="Alugar" />
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    }
+
+                </tbody>
+            </table>
+
+
+        </div>
+
+
+    </div>
+</div>

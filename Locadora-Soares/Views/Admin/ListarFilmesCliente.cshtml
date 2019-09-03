@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Locadora_Soares.Models.Filme>
+
+<div class="row">
+    <div class="col-md-12">
+        <h2 align="center">Filmes Alugados</h2>
+        <br /><br /><br />
+        <table class="table" align="center">
+            <thead>
+                <tr>
+                    <th>
+                        Título
+                    </th>
+                    <th>
+                        Ano
+                    </th>
+                    <th>
+                        Categoria
+                    </th>
+                    
+                    <th>
+                        Devolução Filme
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (!Model.Any())
+                {
+                    <tr>
+                        <td colspan="5" align="center">
+                            Este cliente não possui filmes alugados
+                        </td>
+                    </tr>
+
+                }
+                else
+                {
+
+                    foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nome)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Ano)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Categoria)
+                        </td>
+                        <td>
+                            <form action="/Admin/DevolucaoFilme/" method="post">
+                                <input type="hidden" name="ID" id="ID" value="@Html.DisplayFor(modelItem => item.ID)" />
+                                <input type="hidden" name="nome" id="nome" value="@Html.DisplayFor(modelItem => item.Nome)" />
+                                <input type="hidden" name="ano" id="ano" value="@Html.DisplayFor(modelItem => item.Ano)" />
+                                <input type="hidden" name="categoria" id="categoria" value="@Html.DisplayFor(modelItem => item.Categoria)" />
+                                <input type="hidden" name="ID_Cliente" id="ID_Cliente" value="@Html.DisplayFor(modelItem => item.ID_Cliente)" />
+                                <input type="submit" class="btn btn-primary" name="alugar" id="alugar" value="Devolver" />
+                            </form>
+                        </td>
+                    </tr>
+
+                    }
+                }
+
+
+            </tbody>
+        </table>
+
+
+        <div align="center">
+            <a role="button" class="btn btn-primary" href="/Admin/ListarCliente/">
+                Voltar
+            </a>
+        </div>
+    </div>
+</div>

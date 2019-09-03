@@ -1,0 +1,44 @@
+﻿@model Locadora_Soares.Models.Filme
+
+<div class="row">
+    <div class="col-md-12">
+
+
+        <div class="col-md-12" style="margin-left:30%">
+            <h2>Editar filme</h2>
+            <form role="form" action="/Admin/UpdateFilme/@Html.DisplayFor(model => model.ID)" method="post">
+
+                <div class="form-group">
+                    <label for="InputNome">
+                        Informe o nome
+                    </label>
+                    <input type="text" minlength="1" maxlength="50" name="nome" class="form-control" id="nome" style="width: 100%" value="@Html.DisplayFor(model => model.Nome)" required />
+                </div>
+
+                <div class="form-group">
+
+                    <label for="InputAno">
+                        Informe o ano
+                    </label>
+                    <input type="number" min="1900" max="2099" name="ano" class="form-control" id="ano" value="@Html.DisplayFor(model => model.Ano)" required />
+                </div>
+
+                <div class="form-group">
+
+                    <label for="InputCategoria">
+                        Informe a categoria
+                    </label>
+                    <input type="text" minlength="1" maxlength="50" name="categoria" class="form-control" id="categoria" value="@Html.DisplayFor(model => model.Categoria)" required />
+                </div>
+
+                <div style="margin-left:10%; padding-top: 15px">
+                    <button type="submit" class="btn btn-primary">
+                        Editar
+                    </button>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+</div>
