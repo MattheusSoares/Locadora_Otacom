@@ -15,6 +15,6 @@ namespace Locadora_Soares.Models
 
         public String Categoria{ get; set; }
 
-        public int? ID_Cliente{ get; set; }
+        public int Disponivel { get; set; }
     }
 }

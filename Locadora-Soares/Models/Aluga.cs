@@ -11,7 +11,9 @@ namespace Locadora_Soares.Models
 
         public int ID_Filme { get; set; }
 
-        public DateTime Horario { get; set; 
+        public DateTime Horario { get; set; }
+
+        public int Devolvido { get; set; }
 
         public String Opcional { get; set; }
     }

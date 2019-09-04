@@ -73,7 +73,7 @@ namespace Locadora_Soares.Persistence
         {
             using (var conexao = new SqlConnection(connStr))
             {
-                String queryRead_Available = "SELECT * FROM Filme WHERE ID_Cliente IS NULL ORDER BY ID";
+                String queryRead_Available = "SELECT * FROM Filme WHERE Disponivel = 1 ORDER BY ID";
                 try
                 {
                     var result = conexao.Query<Filme>(queryRead_Available);
@@ -90,27 +90,41 @@ namespace Locadora_Soares.Persistence
 
         }
 
-        public IEnumerable<Filme> Read_Rented(int ID)
+        public void Update_to_Rented(int ID)
         {
             using (var conexao = new SqlConnection(connStr))
             {
-                String queryRead_Rented = "SELECT * FROM Filme WHERE ID_Cliente=@id ORDER BY ID";
+                String queryUpdate_to_Rented = "UPDATE Filme SET Disponivel = 2 WHERE ID = @id";
                 try
                 {
-                    var result = conexao.Query<Filme>(queryRead_Rented, new { ID = ID });
+                    conexao.Execute(queryUpdate_to_Rented, new { ID = ID });
                     conexao.Close();
-                    return result;
-
                 }
                 catch (Exception e)
                 {
 
-                    throw new Exception("Não foi possível retornar os filmes", e);
+                    throw new Exception("Não foi possível alugar o filme", e);
                 }
             }
-
         }
 
+        public void Update_to_Available(int ID)
+        {
+            using (var conexao = new SqlConnection(connStr))
+            {
+                String queryUpdate_to_Available = "UPDATE Filme SET Disponivel = 1 WHERE ID = @id";
+                try
+                {
+                    conexao.Execute(queryUpdate_to_Available, new { ID = ID });
+                    conexao.Close();
+                }
+                catch (Exception e)
+                {
+
+                    throw new Exception("Não foi possível devolver o filme", e);
+                }
+            }
+        }
 
         public void Delete(int ID)
         {
@@ -149,40 +163,6 @@ namespace Locadora_Soares.Persistence
             }
         }
 
-        public void Update_Rent(int ID)
-        {
-            using (var conexao = new SqlConnection(connStr))
-            {
-                String queryUpdate = "UPDATE Filme SET ID_Cliente = NULL WHERE ID = @id";
-                try
-                {
-                    conexao.Execute(queryUpdate, new { ID = ID });
-                    conexao.Close();
-                }
-                catch (Exception e)
-                {
-
-                    throw new Exception("Não foi possível editar o filme", e);
-                }
-            }
-        }
-        public void UpdateAluga(Filme filme)
-        {
-            using (var conexao = new SqlConnection(connStr))
-            {
-                String queryUpdateAluga = "UPDATE Filme SET Nome=@nome, Ano=@ano, Categoria=@categoria, ID_Cliente=@id_cliente WHERE ID = @id";
-                try
-                {
-                    conexao.Execute(queryUpdateAluga, filme);
-                    conexao.Close();
-                }
-                catch (Exception e)
-                {
-
-                    throw new Exception("Não foi possível alugar o filme", e);
-                }
-            }
-        }
 
         private static readonly string connStr = @"Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=Locadora-Soares;Data Source=GENIPABU\SQL2014;user=sa;password=adm123***";
 

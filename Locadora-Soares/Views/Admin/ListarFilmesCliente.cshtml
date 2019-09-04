@@ -49,11 +49,8 @@
                         </td>
                         <td>
                             <form action="/Admin/DevolucaoFilme/" method="post">
-                                <input type="hidden" name="ID" id="ID" value="@Html.DisplayFor(modelItem => item.ID)" />
-                                <input type="hidden" name="nome" id="nome" value="@Html.DisplayFor(modelItem => item.Nome)" />
-                                <input type="hidden" name="ano" id="ano" value="@Html.DisplayFor(modelItem => item.Ano)" />
-                                <input type="hidden" name="categoria" id="categoria" value="@Html.DisplayFor(modelItem => item.Categoria)" />
-                                <input type="hidden" name="ID_Cliente" id="ID_Cliente" value="@Html.DisplayFor(modelItem => item.ID_Cliente)" />
+                                <input type="hidden" name="ID_Filme" id="ID_Filme" value="@Html.DisplayFor(modelItem => item.ID)" />
+                                <input type="hidden" name="ID_Cliente" id="ID_Cliente" value="@ViewBag.ID_Cliente" />
                                 <input type="submit" class="btn btn-primary" name="alugar" id="alugar" value="Devolver" />
                             </form>
                         </td>

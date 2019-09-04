@@ -11,13 +11,15 @@ namespace Locadora_Soares.Controllers
     public class ClienteController : Controller
     {
         private ClienteDAO clienteDAO = new ClienteDAO();
+        private AlugaDAO alugaDAO = new AlugaDAO();
         private FilmeDAO filmeDAO = new FilmeDAO();
-        // GET: Cliente
+
         public ActionResult Index(Cliente cliente)
         {
             ViewBag.ID = cliente.ID;
             ViewBag.Nome = cliente.Nome;
-            return View(filmeDAO.Read_Available());
+            ViewBag.FilmesDisponiveis = filmeDAO.Read_Available();
+            return View();
         }
         public ActionResult ErroLogin()
         {
@@ -57,31 +59,37 @@ namespace Locadora_Soares.Controllers
             cliente.Login = login;
             cliente.Senha = senha;
             clienteDAO.Update(cliente);
-            return RedirectToAction("Index", "Cliente", cliente);
+            return RedirectToAction("EditarPerfilSucesso", "Cliente", clienteDAO.Read_By_ID(ID));
         }
 
-        //ALTERAR
-        public ActionResult AlugarFilme(int ID, string nome, int ano, string categoria, int ID_Cliente)
+        public ActionResult EditarPerfilSucesso(Cliente cliente)
         {
-            Filme filme = new Filme();
-            filme.ID = ID;
-            filme.Nome = nome;
-            filme.Ano = ano;
-            filme.Categoria = categoria;
-            filme.ID_Cliente = ID_Cliente;
-            filmeDAO.UpdateAluga(filme);
+            ViewBag.ID_Cliente = cliente.ID;
+            return View();
 
-            return RedirectToAction("Index", "Cliente", clienteDAO.Read_By_ID(ID_Cliente));
         }
 
-        //ALTERAR
+        public ActionResult AlugarFilme(int ID_Filme, int ID_Cliente)
+        {
+            ViewBag.ID_Cliente = ID_Cliente;
+
+            DateTime Horario = DateTime.Now;
+
+            Aluga aluga = new Aluga();
+            aluga.ID_Cliente = ID_Cliente;
+            aluga.ID_Filme = ID_Filme;
+            aluga.Horario = Horario;
+            alugaDAO.Create(aluga);
+            filmeDAO.Update_to_Rented(ID_Filme);
+            return View();
+        }
+
         public ActionResult FilmesAlugados(int ID)
         {
             ViewBag.ID_Cliente = ID;
-            return View(filmeDAO.Read_Rented(ID));
+            return View(alugaDAO.Read_Rented_by_Cliente(ID));
         }
 
-        //ALTERAR
         public ActionResult ReturnCliente(int ID)
         {
             return RedirectToAction("Index", "Cliente", clienteDAO.Read_By_ID(ID));

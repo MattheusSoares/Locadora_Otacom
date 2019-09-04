@@ -13,6 +13,8 @@ namespace Locadora_Soares.Persistence
         private AdminDAO adminDAO = new AdminDAO();
         private ClienteDAO clienteDAO = new ClienteDAO();
         private FilmeDAO filmeDAO = new FilmeDAO();
+        private AlugaDAO alugaDAO = new AlugaDAO();
+
         // GET: Admin
         public ActionResult Index()
         {
@@ -104,7 +106,6 @@ namespace Locadora_Soares.Persistence
             filme.Nome = nome;
             filme.Ano = ano;
             filme.Categoria = categoria;
-
             filmeDAO.Create(filme);
             return RedirectToAction("CadastroFilmeSucesso", "Admin");
         }
@@ -144,17 +145,26 @@ namespace Locadora_Soares.Persistence
             return View();
         }
 
-        //ALTERAR
         public ActionResult ListarFilmesCliente(int ID)
         {
-            return View(filmeDAO.Read_Rented(ID));
-        }
+            Cliente cliente = clienteDAO.Read_By_ID(ID);
 
+            ViewBag.ID_Cliente = cliente.ID;
+            return View(alugaDAO.Read_Rented_by_Cliente(ID));
+        }
+ 
         //ALTERAR
-        public ActionResult DevolucaoFilme(int ID, string nome, int ano, string categoria, int ID_Cliente)
+        public ActionResult DevolucaoFilme(int ID_Filme, int ID_Cliente)
         {
             ViewBag.ID_Cliente = ID_Cliente;
-            filmeDAO.Update_Rent(ID);
+
+            Aluga aluga = new Aluga();
+
+            aluga.ID_Cliente = ID_Cliente;
+            aluga.ID_Filme = ID_Filme;
+
+            alugaDAO.Update_to_Available(aluga);
+            filmeDAO.Update_to_Available(ID_Filme);
             return View();
         }
 

@@ -61,16 +61,17 @@
 
 
                             @{
-                                if (item.ID_Cliente != null)
-                                {
-                                    <td>
-                                        Sim
-                                    </td>
-                                }
-                                else
+                                if (item.Disponivel == 1)
                                 {
                                     <td>
                                         Não
+                                    </td>
+                                }
+                                else if (item.Disponivel == 2)
+
+                                {
+                                    <td>
+                                        Sim
                                     </td>
                                 }
 

@@ -35,6 +35,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <LangVersion>7.1</LangVersion>
+    <FilesToIncludeForPublish>OnlyFilesToRunTheApp</FilesToIncludeForPublish>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -138,10 +139,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Admin.cs" />
+    <Compile Include="Models\Aluga.cs" />
     <Compile Include="Models\Cliente.cs" />
     <Compile Include="Models\Filme.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Persistence\AdminDAO.cs" />
+    <Compile Include="Persistence\AlugaDAO.cs" />
     <Compile Include="Persistence\ClienteDAO.cs" />
     <Compile Include="Persistence\FilmeDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -179,8 +182,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Filme\Index.cshtml" />
     <Content Include="Views\Cliente\Index.cshtml" />
@@ -206,6 +207,8 @@
     <Content Include="Views\Admin\ListarFilmesCliente.cshtml" />
     <Content Include="Views\Admin\DevolucaoFilme.cshtml" />
     <Content Include="Views\Cliente\FilmesAlugados.cshtml" />
+    <Content Include="Views\Cliente\AlugarFilme.cshtml" />
+    <Content Include="Views\Cliente\EditarPerfilSucesso.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
