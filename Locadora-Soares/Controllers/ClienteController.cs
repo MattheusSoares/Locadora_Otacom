@@ -16,54 +16,91 @@ namespace Locadora_Soares.Controllers
 
         public ActionResult Index(Cliente cliente)
         {
-            ViewBag.ID = cliente.ID;
-            ViewBag.Nome = cliente.Nome;
+            ViewBag.user_layout = "usuario";
+            ViewBag.user = cliente.Nome;
+            ViewBag.title_welcome = "Olá, ";
+            ViewBag.title = "Bem-vindo " + cliente.Nome;
+            ViewBag.session_status = "logado";
+
+            ViewBag.ID_Cliente = cliente.ID;
             ViewBag.FilmesDisponiveis = filmeDAO.Read_Available();
             return View();
         }
         public ActionResult ErroLogin()
         {
+            ViewBag.user_layout = "inicio";
+            ViewBag.title_welcome = "Erro de credenciais";
+            ViewBag.title = "";
+            ViewBag.session_status = "nao_logado";
             return View();
         }
 
         public ActionResult Cadastrar()
         {
+            ViewBag.user_layout = "inicio";
+            ViewBag.title_welcome = "Olá, ";
+            ViewBag.title = "Bem-vindo a Locadora Soares";
+            ViewBag.session_status = "nao_logado";
             return View();
         }
 
         public ActionResult Create(string nome, string login, string senha)
         {
-            Cliente cliente = new Cliente();
-            cliente.Nome = nome;
-            cliente.Login = login;
-            cliente.Senha = senha;
+            Cliente cliente = new Cliente
+            {
+                Nome = nome,
+                Login = login,
+                Senha = senha
+            };
             clienteDAO.Create(cliente);
             return RedirectToAction("CadastroSucesso", "Cliente");
         }
 
         public ActionResult CadastroSucesso()
         {
+            ViewBag.user_layout = "inicio";
+            ViewBag.title_welcome = "Olá, ";
+            ViewBag.title = "Bem-vindo a Locadora Soares";
+            ViewBag.session_status = "nao_logado";
             return View();
         }
 
         public ActionResult EditarPerfil(int ID)
         {
-            return View(clienteDAO.Read_By_ID(ID));
+            Cliente cliente = clienteDAO.Read_By_ID(ID);
+
+            ViewBag.user_layout = "usuario";
+            ViewBag.user = cliente.Nome;
+            ViewBag.title_welcome = "Olá, ";
+            ViewBag.title = "Bem-vindo " + cliente.Nome;
+            ViewBag.session_status = "logado";
+
+            ViewBag.ID_Cliente = cliente.ID;
+
+            return View(cliente);
         }
 
         public ActionResult UpdateCliente(int ID, string nome, string login, string senha)
         {
-            Cliente cliente = new Cliente();
-            cliente.ID = ID;
-            cliente.Nome = nome;
-            cliente.Login = login;
-            cliente.Senha = senha;
+            Cliente cliente = new Cliente
+            {
+                ID = ID,
+                Nome = nome,
+                Login = login,
+                Senha = senha
+            };
             clienteDAO.Update(cliente);
             return RedirectToAction("EditarPerfilSucesso", "Cliente", clienteDAO.Read_By_ID(ID));
         }
 
         public ActionResult EditarPerfilSucesso(Cliente cliente)
         {
+            ViewBag.user_layout = "usuario";
+            ViewBag.user = cliente.Nome;
+            ViewBag.title_welcome = "Olá, ";
+            ViewBag.title = "Bem-vindo " + cliente.Nome;
+            ViewBag.session_status = "logado";
+
             ViewBag.ID_Cliente = cliente.ID;
             return View();
 
@@ -71,14 +108,24 @@ namespace Locadora_Soares.Controllers
 
         public ActionResult AlugarFilme(int ID_Filme, int ID_Cliente)
         {
-            ViewBag.ID_Cliente = ID_Cliente;
+            Cliente cliente = clienteDAO.Read_By_ID(ID_Cliente);
+
+            ViewBag.user_layout = "usuario";
+            ViewBag.user = cliente.Nome;
+            ViewBag.title_welcome = "Olá, ";
+            ViewBag.title = "Bem-vindo " + cliente.Nome;
+            ViewBag.session_status = "logado";
+
+            ViewBag.ID_Cliente = cliente.ID;
 
             DateTime Horario = DateTime.Now;
 
-            Aluga aluga = new Aluga();
-            aluga.ID_Cliente = ID_Cliente;
-            aluga.ID_Filme = ID_Filme;
-            aluga.Horario = Horario;
+            Aluga aluga = new Aluga
+            {
+                ID_Cliente = ID_Cliente,
+                ID_Filme = ID_Filme,
+                Horario = Horario
+            };
             alugaDAO.Create(aluga);
             filmeDAO.Update_to_Rented(ID_Filme);
             return View();
@@ -86,7 +133,16 @@ namespace Locadora_Soares.Controllers
 
         public ActionResult FilmesAlugados(int ID)
         {
+            Cliente cliente = clienteDAO.Read_By_ID(ID);
+
+            ViewBag.user_layout = "usuario";
+            ViewBag.user = cliente.Nome;
+            ViewBag.title_welcome = "Olá, ";
+            ViewBag.title = "Bem-vindo " + cliente.Nome;
+            ViewBag.session_status = "logado";
+
             ViewBag.ID_Cliente = ID;
+
             return View(alugaDAO.Read_Rented_by_Cliente(ID));
         }
 

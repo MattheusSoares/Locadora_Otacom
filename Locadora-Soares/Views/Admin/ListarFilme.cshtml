@@ -1,94 +1,102 @@
 ﻿@model IEnumerable<Locadora_Soares.Models.Filme>
 
 <div class="row">
-    <div class="col-md-12">
-        <h2 align="center">Filmes Cadastrados</h2>
-        <br /><br /><br />
-        <table class="table" align="center">
-            <thead>
-                <tr>
-                    <th>
-                        Título
-                    </th>
-                    <th>
-                        Ano
-                    </th>
-                    <th>
-                        Categoria
-                    </th>
-                    <th colspan="2">
-                        Ações
-                    </th>
-                    <th>
-                        Alugado?
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @if (!Model.Any())
-                {
-                    <tr>
-                        <td colspan="6" align="center">
-                            Não existem filmes cadastrados
-                        </td>
-                    </tr>
-
-                }
-                else
-                {
-                    foreach (var item in Model)
-                    {
+    <div class="col-lg-2">
+    </div>
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="stat-widget-two">
+                <h2 align="center">Filmes Cadastrados</h2>
+                <br /><br /><br />
+                <table class="table" align="center">
+                    <thead>
                         <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Nome)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Ano)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Categoria)
-                            </td>
-                            <td>
-                                <a role="button" class="btn btn-primary" href="/Admin/EditarFilme/@Html.DisplayFor(modelItem => item.ID)">
-                                    Editar
-                                </a>
-                            </td>
-                            <td>
-                                <a role="button" class="btn btn-primary" href="/Admin/ExcluirFilme/@Html.DisplayFor(modelItem => item.ID)">
-                                    Excluir
-                                </a>
-                            </td>
+                            <th>
+                                Título
+                            </th>
+                            <th>
+                                Ano
+                            </th>
+                            <th>
+                                Categoria
+                            </th>
+                            <th colspan="2">
+                                Ações
+                            </th>
+                            <th>
+                                Alugado?
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (!Model.Any())
+                        {
+                            <tr>
+                                <td colspan="6" align="center">
+                                    Não existem filmes cadastrados
+                                </td>
+                            </tr>
 
-
-                            @{
-                                if (item.Disponivel == 1)
-                                {
+                        }
+                        else
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
                                     <td>
-                                        Não
+                                        @Html.DisplayFor(modelItem => item.Nome)
                                     </td>
-                                }
-                                else if (item.Disponivel == 2)
-
-                                {
                                     <td>
-                                        Sim
+                                        @Html.DisplayFor(modelItem => item.Ano)
                                     </td>
-                                }
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Categoria)
+                                    </td>
+                                    <td>
+                                        <a role="button" class="btn btn-outline-info" href="/Admin/EditarFilme/@Html.DisplayFor(modelItem => item.ID)">
+                                            Editar
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a role="button" class="btn btn-outline-danger" href="/Admin/ExcluirFilme/@Html.DisplayFor(modelItem => item.ID)">
+                                            Excluir
+                                        </a>
+                                    </td>
 
+
+                                    @{
+                                        if (item.Disponivel == 1)
+                                        {
+                                            <td>
+                                                Não
+                                            </td>
+                                        }
+                                        else if (item.Disponivel == 2)
+
+                                        {
+                                            <td>
+                                                Sim
+                                            </td>
+                                        }
+
+                                    }
+
+                                </tr>
                             }
 
-                        </tr>
-                    }
+                        }
+                    </tbody>
+                </table>
 
-                }
-                </tbody>
-        </table>
-
-
-        <div align="center">
-            <a role="button" class="btn btn-primary" href="/Admin/AdminMain/">
-                Voltar
-            </a>
+                <br /><br /><br />
+                <div align="center">
+                    <a role="button" class="btn btn-primary" href="/Admin/AdminMain/">
+                        Voltar
+                    </a>
+                </div>
+            </div>
         </div>
+    </div>
+    <div class="col-lg-2">
     </div>
 </div>

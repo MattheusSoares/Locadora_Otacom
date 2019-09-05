@@ -15,14 +15,20 @@ namespace Locadora_Soares.Controllers
 
         public ActionResult Index()
         {
+            ViewBag.user_layout = "inicio";
+            ViewBag.title_welcome = "Olá, ";
+            ViewBag.title = "Bem-vindo a Locadora Soares";
+            ViewBag.session_status = "nao_logado";
             return View();
         }
 
         public ActionResult Login(string login, string senha)
         {
-            Cliente cliente = new Cliente();
-            cliente.Login = login;
-            cliente.Senha = senha;
+            Cliente cliente = new Cliente
+            {
+                Login = login,
+                Senha = senha
+            };
             cliente = DAO.Login(cliente);
             if(cliente == null)
             {

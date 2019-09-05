@@ -18,13 +18,20 @@ namespace Locadora_Soares.Persistence
         // GET: Admin
         public ActionResult Index()
         {
+            ViewBag.user_layout = "inicio";
+            ViewBag.title_welcome = "Bem-vindo a Área Administrativa da Locadora Soares, ";
+            ViewBag.title = "por favor, insira suas credenciais";
+            ViewBag.session_status = "nao_logado";
+
             return View();
         }
         public ActionResult Login(string login, string senha)
         {
-            Admin admin = new Admin();
-            admin.Login = login;
-            admin.Senha = senha;
+            Admin admin = new Admin
+            {
+                Login = login,
+                Senha = senha
+            };
             admin = adminDAO.LoginSU(admin);
             if (admin == null)
             {
@@ -37,59 +44,103 @@ namespace Locadora_Soares.Persistence
         }
         public ActionResult ErroLogin()
         {
+            ViewBag.user_layout = "inicio";
+            ViewBag.title_welcome = "Erro de credenciais";
+            ViewBag.title = "";
+            ViewBag.session_status = "nao_logado";
+
             return View();
         }
 
         public ActionResult AdminMain()
         {
+            ViewBag.user_layout = "admin";
+            ViewBag.title_welcome = "Olá, ";
+            ViewBag.title = "Bem-vindo Administrador";
+            ViewBag.session_status = "logado";
+
             return View();
         }
 
         public ActionResult CadastrarCliente()
         {
+            ViewBag.user_layout = "admin";
+            ViewBag.title_welcome = "Olá, ";
+            ViewBag.title = "Bem-vindo Administrador";
+            ViewBag.session_status = "logado";
+
             return View();
         }
         public ActionResult CreateCliente(string nome, string login, string senha)
         {
-            Cliente cliente = new Cliente();
-            cliente.Nome = nome;
-            cliente.Login = login;
-            cliente.Senha = senha;
+            Cliente cliente = new Cliente
+            {
+                Nome = nome,
+                Login = login,
+                Senha = senha
+            };
             clienteDAO.Create(cliente);
             return RedirectToAction("CadastroClienteSucesso", "Admin");
         }
         public ActionResult CadastroClienteSucesso()
         {
+            ViewBag.user_layout = "admin";
+            ViewBag.title_welcome = "Olá, ";
+            ViewBag.title = "Bem-vindo Administrador";
+            ViewBag.session_status = "logado";
+
             return View();
         }
 
         public ActionResult ListarCliente()
         {
+            ViewBag.user_layout = "admin";
+            ViewBag.title_welcome = "Olá, ";
+            ViewBag.title = "Bem-vindo Administrador";
+            ViewBag.session_status = "logado";
+
             return View(clienteDAO.Read_All());
         }
 
         public ActionResult EditarCliente(int ID)
         {
+            ViewBag.user_layout = "admin";
+            ViewBag.title_welcome = "Olá, ";
+            ViewBag.title = "Bem-vindo Administrador";
+            ViewBag.session_status = "logado";
+
             return View(clienteDAO.Read_By_ID(ID));
         }
 
         public ActionResult UpdateCliente(int ID, string nome, string login, string senha)
         {
-            Cliente cliente = new Cliente();
-            cliente.ID = ID;
-            cliente.Nome = nome;
-            cliente.Login = login;
-            cliente.Senha = senha;
+            Cliente cliente = new Cliente
+            {
+                ID = ID,
+                Nome = nome,
+                Login = login,
+                Senha = senha
+            };
             clienteDAO.Update(cliente);
             return RedirectToAction("EditarClienteSucesso", "Admin");
         }
         public ActionResult EditarClienteSucesso()
         {
+            ViewBag.user_layout = "admin";
+            ViewBag.title_welcome = "Olá, ";
+            ViewBag.title = "Bem-vindo Administrador";
+            ViewBag.session_status = "logado";
+
             return View();
         }
 
         public ActionResult ExcluirCliente(int ID)
         {
+            ViewBag.user_layout = "admin";
+            ViewBag.title_welcome = "Olá, ";
+            ViewBag.title = "Bem-vindo Administrador";
+            ViewBag.session_status = "logado";
+
             clienteDAO.Delete(ID);
             return View();
         }
@@ -97,56 +148,95 @@ namespace Locadora_Soares.Persistence
 
         public ActionResult CadastrarFilme()
         {
+            ViewBag.user_layout = "admin";
+            ViewBag.title_welcome = "Olá, ";
+            ViewBag.title = "Bem-vindo Administrador";
+            ViewBag.session_status = "logado";
+
             return View();
         }
 
         public ActionResult CreateFilme(string nome, int ano, string categoria)
         {
-            Filme filme = new Filme();
-            filme.Nome = nome;
-            filme.Ano = ano;
-            filme.Categoria = categoria;
+            Filme filme = new Filme
+            {
+                Nome = nome,
+                Ano = ano,
+                Categoria = categoria
+            };
             filmeDAO.Create(filme);
             return RedirectToAction("CadastroFilmeSucesso", "Admin");
         }
 
         public ActionResult CadastroFilmeSucesso()
         {
+            ViewBag.user_layout = "admin";
+            ViewBag.title_welcome = "Olá, ";
+            ViewBag.title = "Bem-vindo Administrador";
+            ViewBag.session_status = "logado";
+
             return View();
         }
         public ActionResult ListarFilme()
         {
+            ViewBag.user_layout = "admin";
+            ViewBag.title_welcome = "Olá, ";
+            ViewBag.title = "Bem-vindo Administrador";
+            ViewBag.session_status = "logado";
+
             return View(filmeDAO.Read_All());
         }
 
         public ActionResult EditarFilme(int ID)
         {
+            ViewBag.user_layout = "admin";
+            ViewBag.title_welcome = "Olá, ";
+            ViewBag.title = "Bem-vindo Administrador";
+            ViewBag.session_status = "logado";
+
             return View(filmeDAO.Read_By_ID(ID));
         }
 
         public ActionResult UpdateFilme(int ID, string nome, int ano, string categoria)
         {
-            Filme filme = new Filme();
-            filme.ID = ID;
-            filme.Nome = nome;
-            filme.Ano = ano;
-            filme.Categoria = categoria;
+            Filme filme = new Filme
+            {
+                ID = ID,
+                Nome = nome,
+                Ano = ano,
+                Categoria = categoria
+            };
             filmeDAO.Update(filme);
             return RedirectToAction("EditarFilmeSucesso", "Admin");
         }
         public ActionResult EditarFilmeSucesso()
         {
+            ViewBag.user_layout = "admin";
+            ViewBag.title_welcome = "Olá, ";
+            ViewBag.title = "Bem-vindo Administrador";
+            ViewBag.session_status = "logado";
+
             return View();
         }
 
         public ActionResult ExcluirFilme(int ID)
         {
+            ViewBag.user_layout = "admin";
+            ViewBag.title_welcome = "Olá, ";
+            ViewBag.title = "Bem-vindo Administrador";
+            ViewBag.session_status = "logado";
+
             filmeDAO.Delete(ID);
             return View();
         }
 
         public ActionResult ListarFilmesCliente(int ID)
         {
+            ViewBag.user_layout = "admin";
+            ViewBag.title_welcome = "Olá, ";
+            ViewBag.title = "Bem-vindo Administrador";
+            ViewBag.session_status = "logado";
+
             Cliente cliente = clienteDAO.Read_By_ID(ID);
 
             ViewBag.ID_Cliente = cliente.ID;
@@ -156,12 +246,18 @@ namespace Locadora_Soares.Persistence
         //ALTERAR
         public ActionResult DevolucaoFilme(int ID_Filme, int ID_Cliente)
         {
+            ViewBag.user_layout = "admin";
+            ViewBag.title_welcome = "Olá, ";
+            ViewBag.title = "Bem-vindo Administrador";
+            ViewBag.session_status = "logado";
+
             ViewBag.ID_Cliente = ID_Cliente;
 
-            Aluga aluga = new Aluga();
-
-            aluga.ID_Cliente = ID_Cliente;
-            aluga.ID_Filme = ID_Filme;
+            Aluga aluga = new Aluga
+            {
+                ID_Cliente = ID_Cliente,
+                ID_Filme = ID_Filme
+            };
 
             alugaDAO.Update_to_Available(aluga);
             filmeDAO.Update_to_Available(ID_Filme);

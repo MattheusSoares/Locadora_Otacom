@@ -8,48 +8,133 @@
 
     <!-- ================= Favicon ================== -->
     <!-- Standard -->
-    <link rel="shortcut icon" href="http://placehold.it/64.png/000/fff">
+    <link rel="shortcut icon" href="~/Content/template/assets/images/logo_movie_rental.png">
     <!-- Retina iPad Touch Icon-->
-    <link rel="apple-touch-icon" sizes="144x144" href="http://placehold.it/144.png/000/fff">
+    <link rel="apple-touch-icon" sizes="144x144" href="~/Content/template/assets/images/logo_movie_rental.png">
     <!-- Retina iPhone Touch Icon-->
-    <link rel="apple-touch-icon" sizes="114x114" href="http://placehold.it/114.png/000/fff">
+    <link rel="apple-touch-icon" sizes="114x114" href="~/Content/template/assets/images/logo_movie_rental.png">
     <!-- Standard iPad Touch Icon-->
-    <link rel="apple-touch-icon" sizes="72x72" href="http://placehold.it/72.png/000/fff">
+    <link rel="apple-touch-icon" sizes="72x72" href="~/Content/template/assets/images/logo_movie_rental.png">
     <!-- Standard iPhone Touch Icon-->
-    <link rel="apple-touch-icon" sizes="57x57" href="http://placehold.it/57.png/000/fff">
+    <link rel="apple-touch-icon" sizes="57x57" href="~/Content/template/assets/images/logo_movie_rental.png">
 
     <!-- Styles -->
-    <link href="assets/css/lib/weather-icons.css" rel="stylesheet" />
-    <link href="assets/css/lib/owl.carousel.min.css" rel="stylesheet" />
-    <link href="assets/css/lib/owl.theme.default.min.css" rel="stylesheet" />
-    <link href="assets/css/lib/font-awesome.min.css" rel="stylesheet">
-    <link href="assets/css/lib/themify-icons.css" rel="stylesheet">
-    <link href="assets/css/lib/menubar/sidebar.css" rel="stylesheet">
-    <link href="assets/css/lib/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/template/assets/css/lib/weather-icons.css" rel="stylesheet" />
+    <link href="~/Content/template/assets/css/lib/owl.carousel.min.css" rel="stylesheet" />
+    <link href="~/Content/template/assets/css/lib/owl.theme.default.min.css" rel="stylesheet" />
+    <link href="~/Content/template/assets/css/lib/font-awesome.min.css" rel="stylesheet">
+    <link href="~/Content/template/assets/css/lib/themify-icons.css" rel="stylesheet">
+    <link href="~/Content/template/assets/css/lib/menubar/sidebar.css" rel="stylesheet">
+    <link href="~/Content/template/assets/css/lib/bootstrap.min.css" rel="stylesheet">
 
-    <link href="assets/css/lib/helper.css" rel="stylesheet">
-    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="~/Content/template/assets/css/lib/helper.css" rel="stylesheet">
+    <link href="~/Content/template/assets/css/style.css" rel="stylesheet">
 
 
 </head>
-<body>
+<body class="sidebar-hide">
 
 
     <div class="sidebar sidebar-hide-to-small sidebar-shrink sidebar-gestures">
         <div class="nano">
             <div class="nano-content">
-                <div class="logo"><!-- <img src="assets/images/logo.png" alt="" /> --><span>@Html.ActionLink("Locadora Soares", "Index", "Home")</span></div>
-                <ul>
-                    <li class="label">Main</li>
-                    <li class="active">
-                        <a class="sidebar-sub-toggle"><i class="ti-home"></i> Login <span class="sidebar-collapse-icon ti-angle-down"></span></a>
-                        <ul>
-                            <li>@Html.ActionLink("Usuário", "Index", "Home")</li>
-                            <li>@Html.ActionLink("Administração", "Index", "Admin")</li>
-                        </ul>
-                    </li>
 
-                    <li><a href="@Url.Action("Index", "Home")"><i class="ti-close"></i> Logout</a></li>
+                @if (ViewBag.user_layout == "usuario")
+                {
+                    <div class="logo"><!-- <img src="assets/images/logo.png" alt="" /> --><span><a href="/Cliente/ReturnCliente/@ViewBag.ID_Cliente">Locadora Soares</a></span></div>
+                }
+                @if (ViewBag.user_layout == "admin")
+                {
+                    <div class="logo"><!-- <img src="assets/images/logo.png" alt="" /> --><span><a href="/Admin/AdminMain/">Locadora Soares</a></span></div>
+                }
+                @if (ViewBag.session_status == "nao_logado")
+                {
+                    <div class="logo"><!-- <img src="assets/images/logo.png" alt="" /> --><span><a href="/Home/Index/">Locadora Soares</a></span></div>
+                }
+
+
+                <ul>
+
+                    @{
+                        if (ViewBag.user_layout == "usuario")
+                        {
+                            <li class="label">Cliente</li>
+                            <li class="sidebar-sub-toggle">
+                                <a class="sidebar-sub-toggle"><i class="ti-user"></i> @ViewBag.user <span class="sidebar-collapse-icon ti-angle-down"></span></a>
+
+                                <ul>
+                                    <li><a href="/Cliente/EditarPerfil/@ViewBag.ID_Cliente"><i class="ti-pencil"></i> <span>Editar Perfil</span></a></li>
+                                    <li><a href="/Cliente/FilmesAlugados/@ViewBag.ID_Cliente"><i class="ti-video-camera"></i> <span>Filmes Alugados</span></a></li>
+                                </ul>
+                            </li>
+
+                        }
+
+
+
+                        if (ViewBag.user_layout == "admin")
+                        {
+
+                            <li class="label">Administrador</li>
+
+                            <li class="label">Estatísticas</li>
+                            <li class="sidebar-sub-toggle">
+                                <a class="sidebar-sub-toggle"><i class="ti-panel"></i>Relatórios<span class="sidebar-collapse-icon ti-angle-down"></span></a>
+                                <ul>
+                                    <li><a href="#"><i class="ti-pencil"></i> <span>Editar Perfil</span></a></li>
+                                    <li><a href="#"><i class="ti-pencil"></i> <span>Editar Perfil</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="sidebar-sub-toggle">
+                                <a class="sidebar-sub-toggle"><i class="ti-bar-chart"></i>Gráficos<span class="sidebar-collapse-icon ti-angle-down"></span></a>
+                                <ul>
+                                    <li><a href="#"><i class="ti-pencil"></i> <span>Editar Perfil</span></a></li>
+                                    <li><a href="#"><i class="ti-pencil"></i> <span>Editar Perfil</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="label">Registros</li>
+                            <li class="sidebar-sub-toggle">
+                                <a class="sidebar-sub-toggle"><i class="ti-id-badge"></i>Clientes<span class="sidebar-collapse-icon ti-angle-down"></span></a>
+                                <ul>
+                                    <li><a href="/Admin/CadastrarCliente/"><i class="ti-save"></i> <span>Cadastrar Clientes</span></a></li>
+                                    <li><a href="/Admin/ListarCliente/"><i class="ti-menu-alt"></i> <span>Listar Clientes</span></a></li>
+                                </ul>
+                            </li>
+
+                            <li class="sidebar-sub-toggle">
+                                <a class="sidebar-sub-toggle"><i class="ti-video-clapper"></i>Filmes<span class="sidebar-collapse-icon ti-angle-down"></span></a>
+                                <ul>
+                                    <li><a href="/Admin/CadastrarFilme/"><i class="ti-save"></i> <span>Cadastrar Filmes</span></a></li>
+                                    <li><a href="/Admin/ListarFilme/"><i class="ti-menu-alt"></i> <span>Listar Filmes</span></a></li>
+                                </ul>
+                            </li>
+
+                        }
+
+
+                        if (ViewBag.session_status == "nao_logado")
+                        {
+                            <li class="label"></li>
+                            <li class="sidebar-sub-toggle">
+                                <a class="sidebar-sub-toggle"><i class="ti-home"></i> Login <span class="sidebar-collapse-icon ti-angle-down"></span></a>
+                                <ul>
+                                    <li>@Html.ActionLink("Usuário", "Index", "Home")</li>
+                                    <li>@Html.ActionLink("Administração", "Index", "Admin")</li>
+                                </ul>
+                            </li>
+
+                        }
+
+
+
+                    }
+
+                    @if (ViewBag.session_status == "logado")
+                    {
+                        <li><a href="@Url.Action("Index", "Home")"><i class="ti-close"></i> Logout</a></li>
+                    }
+
+
                 </ul>
             </div>
         </div>
@@ -70,67 +155,86 @@
                     </div>
                     <div class="float-right">
                         <ul>
+                            @if (ViewBag.user_layout == "admin")
+                            {
+                                <li class="header-icon">
+                                    <i class="ti-lock"></i>
+                                </li>
+                            }
+                            else if (ViewBag.session_status == "nao_logado")
+                            {
+                                <li class="header-icon">
+                                    <i class="ti-blackboard"></i>
+                                </li>
 
-                            <li class="header-icon dib">
-                                <i class="ti-bell"></i>
-                                <div class="drop-down">
-                                    <div class="dropdown-content-heading">
-                                        <span class="text-left">Lançamentos</span>
+                            }
+
+
+
+                            @if (ViewBag.user_layout == "usuario")
+                            {
+                                <li class="header-icon dib">
+                                    <i class="ti-bell"></i>
+                                    <div class="drop-down">
+                                        <div class="dropdown-content-heading">
+                                            <span class="text-left">Lançamentos</span>
+                                        </div>
+                                        <div class="dropdown-content-body">
+                                            <ul>
+
+                                                <li>
+                                                    <a>
+                                                        <div class="notification-content">
+                                                            <small class="notification-timestamp pull-right">2019</small>
+                                                            <div class="notification-heading">O Som do Silêncio</div>
+                                                            <div class="notification-text">Drama</div>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a>
+                                                        <div class="notification-content">
+                                                            <small class="notification-timestamp pull-right">2019</small>
+                                                            <div class="notification-heading">Rambo: Até o Fim</div>
+                                                            <div class="notification-text">Ação/Aventura/Suspense/Western</div>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a>
+                                                        <div class="notification-content">
+                                                            <small class="notification-timestamp pull-right">2019</small>
+                                                            <div class="notification-heading">Ad Astra</div>
+                                                            <div class="notification-text">Aventura/Drama/Mistério/Ficção Científica/Suspense</div>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                                <li class="text-center">
+                                                    <a href="https://www.imdb.com/movies-coming-soon/?ref_=inth_cs" target="_blank" class="more-link">Ver Mais</a>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                    <div class="dropdown-content-body">
-                                        <ul>
+                                </li>
 
-                                            <li>
-                                                <a>
-                                                    <div class="notification-content">
-                                                        <small class="notification-timestamp pull-right">2019</small>
-                                                        <div class="notification-heading">O Som do Silêncio</div>
-                                                        <div class="notification-text">Drama</div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a>
-                                                    <div class="notification-content">
-                                                        <small class="notification-timestamp pull-right">2019</small>
-                                                        <div class="notification-heading">Rambo: Até o Fim</div>
-                                                        <div class="notification-text">Ação/Aventura/Suspense/Western</div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a>
-                                                    <div class="notification-content">
-                                                        <small class="notification-timestamp pull-right">2019</small>
-                                                        <div class="notification-heading">Ad Astra</div>
-                                                        <div class="notification-text">Aventura/Drama/Mistério/Ficção Científica/Suspense</div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li class="text-center">
-                                                <a href="https://www.imdb.com/movies-in-theaters/?ref_=nv_tp_inth_1" target="_blank" class="more-link">Ver Mais</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </li>
+                                @*if (ViewBag.user_layout != "inicio")
+            {
+                <li class="header-icon dib">
+                    <span class="user-avatar">@ViewBag.user<i class="ti-angle-down f-s-10"></i></span>
+                    <div class="drop-down dropdown-profile">
 
-                            <li class="header-icon dib">
-                                <span class="user-avatar">~USER~ <i class="ti-angle-down f-s-10"></i></span>
-                                <div class="drop-down dropdown-profile">
+                        <div class="dropdown-content-body">
+                            <ul>
+                                <li><a href="#"><i class="ti-pencil"></i> <span>Editar Perfil</span></a></li>
+                                <li><a href="#"><i class="ti-video-camera"></i> <span>Filmes Alugados</span></a></li>
 
-                                    <div class="dropdown-content-body">
-                                        <ul>
-                                            <li><i class="ti-user"></i> <span>Usuário - </span></li>
-
-                                            <li><a href="#"><i class="ti-pencil"></i> <span>Editar Perfil ?</span></a></li>
-                                            <li><a href="#"><i class="ti-video-camera"></i> <span>Meus Filmes Alugados ?</span></a></li>
-
-                                            <li><a href="#"><i class="ti-close"></i> <span>Logout</span></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </li>
+                                <li><a href="#"><i class="ti-close"></i> <span>Logout</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            }*@
+                            }
                         </ul>
                     </div>
                 </div>
@@ -150,7 +254,7 @@
                     <div class="col-lg-12 p-r-0 title-margin-right">
                         <div class="page-header">
                             <div class="page-title">
-                                <h1>Olá, <span>Usuário/ADM</span></h1>
+                                <h1>@ViewBag.title_welcome<span>@ViewBag.title</span></h1>
                             </div>
                         </div>
                     </div>
@@ -159,17 +263,19 @@
                 </div>
                 <!-- /# row -->
                 <section id="main-content">
-                    <div class="row">
-                        @RenderBody()
-                    </div>
+
+                    @RenderBody()
                     <!-- /# row -->
+
 
 
                     <div class="row">
                         <div class="col-lg-12">
-                            <br /><br /><br /><br /><br />
+                            <br /><br /><br /><br /><br /><br />
                         </div>
                     </div>
+                    <!-- /# row -->
+
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="footer">
@@ -177,6 +283,7 @@
                             </div>
                         </div>
                     </div>
+                    <!-- /# row -->
 
                 </section>
             </div>
@@ -185,69 +292,69 @@
 
 
     <!-- jquery vendor -->
-    <script src="assets/js/lib/jquery.min.js"></script>
-    <script src="assets/js/lib/jquery.nanoscroller.min.js"></script>
+    <script src="~/Content/template/assets/js/lib/jquery.min.js"></script>
+    <script src="~/Content/template/assets/js/lib/jquery.nanoscroller.min.js"></script>
     <!-- nano scroller -->
-    <script src="assets/js/lib/menubar/sidebar.js"></script>
-    <script src="assets/js/lib/preloader/pace.min.js"></script>
+    <script src="~/Content/template/assets/js/lib/menubar/sidebar.js"></script>
+    <script src="~/Content/template/assets/js/lib/preloader/pace.min.js"></script>
     <!-- sidebar -->
-    <script src="assets/js/lib/bootstrap.min.js"></script>
+    <script src="~/Content/template/assets/js/lib/bootstrap.min.js"></script>
 
     <!-- bootstrap -->
 
-    <script src="assets/js/lib/circle-progress/circle-progress.min.js"></script>
-    <script src="assets/js/lib/circle-progress/circle-progress-init.js"></script>
+    <script src="~/Content/template/assets/js/lib/circle-progress/circle-progress.min.js"></script>
+    <script src="~/Content/template/assets/js/lib/circle-progress/circle-progress-init.js"></script>
 
-    <script src="assets/js/lib/morris-chart/raphael-min.js"></script>
-    <script src="assets/js/lib/morris-chart/morris.js"></script>
-    <script src="assets/js/lib/morris-chart/morris-init.js"></script>
+    <script src="~/Content/template/assets/js/lib/morris-chart/raphael-min.js"></script>
+    <script src="~/Content/template/assets/js/lib/morris-chart/morris.js"></script>
+    <script src="~/Content/template/assets/js/lib/morris-chart/morris-init.js"></script>
 
     <!--  flot-chart js -->
-    <script src="assets/js/lib/flot-chart/jquery.flot.js"></script>
-    <script src="assets/js/lib/flot-chart/jquery.flot.resize.js"></script>
-    <script src="assets/js/lib/flot-chart/flot-chart-init.js"></script>
+    <script src="~/Content/template/assets/js/lib/flot-chart/jquery.flot.js"></script>
+    <script src="~/Content/template/assets/js/lib/flot-chart/jquery.flot.resize.js"></script>
+    <script src="~/Content/template/assets/js/lib/flot-chart/flot-chart-init.js"></script>
     <!-- // flot-chart js -->
 
 
-    <script src="assets/js/lib/vector-map/jquery.vmap.js"></script>
+    <script src="~/Content/template/assets/js/lib/vector-map/jquery.vmap.js"></script>
     <!-- scripit init-->
-    <script src="assets/js/lib/vector-map/jquery.vmap.min.js"></script>
+    <script src="~/Content/template/assets/js/lib/vector-map/jquery.vmap.min.js"></script>
     <!-- scripit init-->
-    <script src="assets/js/lib/vector-map/jquery.vmap.sampledata.js"></script>
+    <script src="~/Content/template/assets/js/lib/vector-map/jquery.vmap.sampledata.js"></script>
     <!-- scripit init-->
-    <script src="assets/js/lib/vector-map/country/jquery.vmap.world.js"></script>
+    <script src="~/Content/template/assets/js/lib/vector-map/country/jquery.vmap.world.js"></script>
     <!-- scripit init-->
-    <script src="assets/js/lib/vector-map/country/jquery.vmap.algeria.js"></script>
+    <script src="~/Content/template/assets/js/lib/vector-map/country/jquery.vmap.algeria.js"></script>
     <!-- scripit init-->
-    <script src="assets/js/lib/vector-map/country/jquery.vmap.argentina.js"></script>
+    <script src="~/Content/template/assets/js/lib/vector-map/country/jquery.vmap.argentina.js"></script>
     <!-- scripit init-->
-    <script src="assets/js/lib/vector-map/country/jquery.vmap.brazil.js"></script>
+    <script src="~/Content/template/assets/js/lib/vector-map/country/jquery.vmap.brazil.js"></script>
     <!-- scripit init-->
-    <script src="assets/js/lib/vector-map/country/jquery.vmap.france.js"></script>
+    <script src="~/Content/template/assets/js/lib/vector-map/country/jquery.vmap.france.js"></script>
     <!-- scripit init-->
-    <script src="assets/js/lib/vector-map/country/jquery.vmap.germany.js"></script>
+    <script src="~/Content/template/assets/js/lib/vector-map/country/jquery.vmap.germany.js"></script>
     <!-- scripit init-->
-    <script src="assets/js/lib/vector-map/country/jquery.vmap.greece.js"></script>
+    <script src="~/Content/template/assets/js/lib/vector-map/country/jquery.vmap.greece.js"></script>
     <!-- scripit init-->
-    <script src="assets/js/lib/vector-map/country/jquery.vmap.iran.js"></script>
+    <script src="~/Content/template/assets/js/lib/vector-map/country/jquery.vmap.iran.js"></script>
     <!-- scripit init-->
-    <script src="assets/js/lib/vector-map/country/jquery.vmap.iraq.js"></script>
+    <script src="~/Content/template/assets/js/lib/vector-map/country/jquery.vmap.iraq.js"></script>
     <!-- scripit init-->
-    <script src="assets/js/lib/vector-map/country/jquery.vmap.russia.js"></script>
+    <script src="~/Content/template/assets/js/lib/vector-map/country/jquery.vmap.russia.js"></script>
     <!-- scripit init-->
-    <script src="assets/js/lib/vector-map/country/jquery.vmap.tunisia.js"></script>
+    <script src="~/Content/template/assets/js/lib/vector-map/country/jquery.vmap.tunisia.js"></script>
     <!-- scripit init-->
-    <script src="assets/js/lib/vector-map/country/jquery.vmap.europe.js"></script>
+    <script src="~/Content/template/assets/js/lib/vector-map/country/jquery.vmap.europe.js"></script>
     <!-- scripit init-->
-    <script src="assets/js/lib/vector-map/country/jquery.vmap.usa.js"></script>
+    <script src="~/Content/template/assets/js/lib/vector-map/country/jquery.vmap.usa.js"></script>
     <!-- scripit init-->
-    <script src="assets/js/lib/vector-map/vector.init.js"></script>
+    <script src="~/Content/template/assets/js/lib/vector-map/vector.init.js"></script>
 
-    <script src="assets/js/lib/weather/jquery.simpleWeather.min.js"></script>
-    <script src="assets/js/lib/weather/weather-init.js"></script>
-    <script src="assets/js/lib/owl-carousel/owl.carousel.min.js"></script>
-    <script src="assets/js/lib/owl-carousel/owl.carousel-init.js"></script>
-    <script src="assets/js/scripts.js"></script>
+    <script src="~/Content/template/assets/js/lib/weather/jquery.simpleWeather.min.js"></script>
+    <script src="~/Content/template/assets/js/lib/weather/weather-init.js"></script>
+    <script src="~/Content/template/assets/js/lib/owl-carousel/owl.carousel.min.js"></script>
+    <script src="~/Content/template/assets/js/lib/owl-carousel/owl.carousel-init.js"></script>
+    <script src="~/Content/template/assets/js/scripts.js"></script>
     <!-- scripit init-->
 
 </body>

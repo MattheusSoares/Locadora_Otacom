@@ -1,63 +1,74 @@
 ﻿@model IEnumerable<Locadora_Soares.Models.Filme>
+
 <div class="row">
-    <div class="col-md-12">
-        <h2 align="center">Filmes Alugados</h2>
-        <br /><br /><br />
-        <table class="table" align="center">
-            <thead>
-                <tr>
-                    <th>
-                        Título
-                    </th>
-                    <th>
-                        Ano
-                    </th>
-                    <th>
-                        Categoria
-                    </th>
 
-                </tr>
-            </thead>
-            <tbody>
-                @if (!Model.Any())
-                {
-                    <tr>
-                        <td colspan="5" align="center">
-                            Você não possui filmes alugados
-                        </td>
-                    </tr>
-
-                }
-                else
-                {
-
-                    foreach (var item in Model)
-                    {
+    <div class="col-lg-2">
+    </div>
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="stat-widget-two">
+                <h2 align="center">Filmes Alugados</h2>
+                <br /><br /><br />
+                <table class="table" align="center">
+                    <thead>
                         <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Nome)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Ano)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Categoria)
-                            </td>
-                            
+                            <th>
+                                Título
+                            </th>
+                            <th>
+                                Ano
+                            </th>
+                            <th>
+                                Categoria
+                            </th>
+
                         </tr>
+                    </thead>
+                    <tbody>
+                        @if (!Model.Any())
+                        {
+                            <tr>
+                                <td colspan="5" align="center">
+                                    Você não possui filmes alugados
+                                </td>
+                            </tr>
 
-                    }
-                }
+                        }
+                        else
+                        {
+
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Nome)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Ano)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Categoria)
+                                    </td>
+
+                                </tr>
+
+                            }
+                        }
 
 
-            </tbody>
-        </table>
+                    </tbody>
+                </table>
 
 
-        <div align="center">
-            <a role="button" class="btn btn-primary" href="/Cliente/ReturnCliente/@ViewBag.ID_Cliente">
-                Voltar
-            </a>
+                <div align="center">
+                    <a role="button" class="btn btn-primary" href="/Cliente/ReturnCliente/@ViewBag.ID_Cliente">
+                        Voltar
+                    </a>
+                </div>
+
+            </div>
         </div>
+    </div>
+    <div class="col-lg-2">
     </div>
 </div>
