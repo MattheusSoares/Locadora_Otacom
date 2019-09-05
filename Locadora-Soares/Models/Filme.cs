@@ -16,5 +16,27 @@ namespace Locadora_Soares.Models
         public String Categoria{ get; set; }
 
         public int Disponivel { get; set; }
+
+        public Filme() { }
+        public Filme(String nome, int ano, String categoria) {
+            this.Nome = nome;
+            this.Ano = ano;
+            this.Categoria = categoria;
+        }
+
+        public Filme(int id, String nome, int ano, String categoria) {
+            this.ID = id;
+            this.Nome = nome;
+            this.Ano = ano;
+            this.Categoria = categoria;
+        }
+
+        public Filme(int id, String nome, int ano, String categoria, int disponivel) {
+            this.ID = id;
+            this.Nome = nome;
+            this.Ano = ano;
+            this.Categoria = categoria;
+            this.Disponivel = disponivel;
+        }
     }
 }

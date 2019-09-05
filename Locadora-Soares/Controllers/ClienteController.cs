@@ -46,12 +46,7 @@ namespace Locadora_Soares.Controllers
 
         public ActionResult Create(string nome, string login, string senha)
         {
-            Cliente cliente = new Cliente
-            {
-                Nome = nome,
-                Login = login,
-                Senha = senha
-            };
+            Cliente cliente = new Cliente(nome,login,senha);
             clienteDAO.Create(cliente);
             return RedirectToAction("CadastroSucesso", "Cliente");
         }
@@ -82,13 +77,7 @@ namespace Locadora_Soares.Controllers
 
         public ActionResult UpdateCliente(int ID, string nome, string login, string senha)
         {
-            Cliente cliente = new Cliente
-            {
-                ID = ID,
-                Nome = nome,
-                Login = login,
-                Senha = senha
-            };
+            Cliente cliente = new Cliente(ID,nome,login,senha);
             clienteDAO.Update(cliente);
             return RedirectToAction("EditarPerfilSucesso", "Cliente", clienteDAO.Read_By_ID(ID));
         }
@@ -120,12 +109,7 @@ namespace Locadora_Soares.Controllers
 
             DateTime Horario = DateTime.Now;
 
-            Aluga aluga = new Aluga
-            {
-                ID_Cliente = ID_Cliente,
-                ID_Filme = ID_Filme,
-                Horario = Horario
-            };
+            Aluga aluga = new Aluga(ID_Cliente,ID_Filme,Horario);
             alugaDAO.Create(aluga);
             filmeDAO.Update_to_Rented(ID_Filme);
             return View();

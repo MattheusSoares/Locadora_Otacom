@@ -27,11 +27,7 @@ namespace Locadora_Soares.Persistence
         }
         public ActionResult Login(string login, string senha)
         {
-            Admin admin = new Admin
-            {
-                Login = login,
-                Senha = senha
-            };
+            Admin admin = new Admin(login,senha);
             admin = adminDAO.LoginSU(admin);
             if (admin == null)
             {
@@ -73,12 +69,7 @@ namespace Locadora_Soares.Persistence
         }
         public ActionResult CreateCliente(string nome, string login, string senha)
         {
-            Cliente cliente = new Cliente
-            {
-                Nome = nome,
-                Login = login,
-                Senha = senha
-            };
+            Cliente cliente = new Cliente(nome,login,senha);
             clienteDAO.Create(cliente);
             return RedirectToAction("CadastroClienteSucesso", "Admin");
         }
@@ -114,13 +105,7 @@ namespace Locadora_Soares.Persistence
 
         public ActionResult UpdateCliente(int ID, string nome, string login, string senha)
         {
-            Cliente cliente = new Cliente
-            {
-                ID = ID,
-                Nome = nome,
-                Login = login,
-                Senha = senha
-            };
+            Cliente cliente = new Cliente(ID, nome,login,senha);
             clienteDAO.Update(cliente);
             return RedirectToAction("EditarClienteSucesso", "Admin");
         }
@@ -158,12 +143,7 @@ namespace Locadora_Soares.Persistence
 
         public ActionResult CreateFilme(string nome, int ano, string categoria)
         {
-            Filme filme = new Filme
-            {
-                Nome = nome,
-                Ano = ano,
-                Categoria = categoria
-            };
+            Filme filme = new Filme(nome,ano,categoria);
             filmeDAO.Create(filme);
             return RedirectToAction("CadastroFilmeSucesso", "Admin");
         }
@@ -199,13 +179,7 @@ namespace Locadora_Soares.Persistence
 
         public ActionResult UpdateFilme(int ID, string nome, int ano, string categoria)
         {
-            Filme filme = new Filme
-            {
-                ID = ID,
-                Nome = nome,
-                Ano = ano,
-                Categoria = categoria
-            };
+            Filme filme = new Filme(ID,nome,ano,categoria);
             filmeDAO.Update(filme);
             return RedirectToAction("EditarFilmeSucesso", "Admin");
         }
@@ -253,11 +227,7 @@ namespace Locadora_Soares.Persistence
 
             ViewBag.ID_Cliente = ID_Cliente;
 
-            Aluga aluga = new Aluga
-            {
-                ID_Cliente = ID_Cliente,
-                ID_Filme = ID_Filme
-            };
+            Aluga aluga = new Aluga(ID_Cliente, ID_Filme);
 
             alugaDAO.Update_to_Available(aluga);
             filmeDAO.Update_to_Available(ID_Filme);
