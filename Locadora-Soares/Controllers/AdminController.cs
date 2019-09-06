@@ -57,6 +57,37 @@ namespace Locadora_Soares.Persistence
             ViewBag.title = "Bem-vindo Administrador";
             ViewBag.session_status = "logado";
 
+            IEnumerable<TopFilmeLocacoes> filmesMaisAlugados = alugaDAO.Read_Top_Movies_Rented();
+
+            IEnumerable<FilmesAlugados> filmesAlugados = alugaDAO.Read_Last_Movies_Rented();
+            IEnumerable<FilmesAlugados> filmesDevolvidos = alugaDAO.Read_Last_Movies_Returned();
+
+            ViewBag.filmesAlugados = filmesAlugados;
+            ViewBag.filmesDevolvidos = filmesDevolvidos;
+
+            List<int> valores = new List<int>();
+            List<string> labels = new List<string>();
+
+            foreach (var f in filmesMaisAlugados) {
+
+                //if (f.Filme.Count()>20)
+                //{
+                //    labels.Add(String.Concat(f.Filme.Substring(0, 17),"..."));
+                //}
+                //else
+                //{
+                    labels.Add(f.Filme);
+                //}
+
+                valores.Add(f.Locacoes);
+
+            }
+
+            ViewBag.labels = labels;
+
+            ViewBag.valores = valores;
+
+
             return View();
         }
 
@@ -283,6 +314,7 @@ namespace Locadora_Soares.Persistence
 
             IEnumerable<TopFilmeLocacoes> topFilmeLocacoes = alugaDAO.Read_Top_Movies_Rented();
 
+          
             return View(topFilmeLocacoes);
         }
 

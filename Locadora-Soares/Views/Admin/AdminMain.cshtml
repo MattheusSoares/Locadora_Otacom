@@ -1,137 +1,144 @@
-﻿<script></script>
+﻿@using System;
+@using System.Data;
 
 <div class="row">
-    <div class="col-lg-3">
-        <div class="card">
-            <div class="stat-widget-two">
+    <div class="col-lg-5">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <h5 align="center">Últimos Filmes Alugados</h5>
+                    <br /><br /><br />
+                    <table class="table" style="text-align:center">
+                        <thead>
+                            <tr>
+                                <th style="text-align:center">
+                                    Cliente
+                                </th>
+                                <th style="text-align:center">
+                                    Filme
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in ViewBag.filmesAlugados)
+                            {
+                                <tr>
+                                    <td style="text-align:center">
+                                        @item.Cliente
+                                    </td>
+                                    <td style="text-align:center">
+                                        @item.Filme
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
 
-                Relatórios e alguns gráficos
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-lg-6">
-        <div class="card">
-            <div class="stat-widget-two">
 
-                Relatórios e alguns gráficos
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+
+                    <h5 align="center">Últimos Filmes Devolvidos</h5>
+                    <br /><br /><br />
+                    <table class="table" style="text-align:center">
+                        <thead>
+                            <tr>
+                                <th style="text-align:center">
+                                    Cliente
+                                </th>
+                                <th style="text-align:center">
+                                    Filme
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in ViewBag.filmesDevolvidos)
+                            {
+                                <tr>
+                                    <td style="text-align:center">
+                                        @item.Cliente
+                                    </td>
+                                    <td style="text-align:center">
+                                        @item.Filme
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
             </div>
         </div>
-    </div>
-    <div class="col-lg-3">
-        <div class="card">
-            <div class="stat-widget-two">
 
-                Relatórios e alguns gráficos
-            </div>
+    </div>
+    <div class="col-lg-7">
+        <div class="card">
+            <h5 align="center">Filmes Mais Alugados</h5>
+            <canvas id="myChart"></canvas>
+
         </div>
     </div>
 </div>
 <!-- /# row -->
 
-<div class="row">
-    <div class="col-lg-6">
-        <div class="card">
-            <div class="stat-widget-two">
 
-                Relatórios e alguns gráficos
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-4">
-        <div class="card">
-            <div class="stat-widget-two">
+<script src="~/Content/template/assets/js/js_chart/node_modules/chart.js/dist/Chart.js"></script>
 
-                Relatórios e alguns gráficos
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-2">
-        <div class="card">
-            <div class="stat-widget-two">
+<script>
+    var ctx = document.getElementById('myChart');
+    var myChart = new Chart(ctx, {
+        type: 'horizontalBar',
+        data: {
+            labels: [
+                @Html.Raw(Json.Encode(ViewBag.labels[0])),
+                @Html.Raw(Json.Encode(ViewBag.labels[1])),
+                @Html.Raw(Json.Encode(ViewBag.labels[2])),
+                @Html.Raw(Json.Encode(ViewBag.labels[3])),
+                @Html.Raw(Json.Encode(ViewBag.labels[4]))
+            ],
+            datasets: [{
+                label: '',
+                data: [
+                    @ViewBag.valores[0],
+                    @ViewBag.valores[1],
+                    @ViewBag.valores[2],
+                    @ViewBag.valores[3],
+                    @ViewBag.valores[4]
+                ],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        stepSize: 1
 
-                Relatórios e alguns gráficos
-            </div>
-        </div>
-    </div>
-</div>
-<!-- /# row -->
-
-<div class="row">
-    <div class="col-lg-4">
-        <div class="card">
-            <div class="stat-widget-two">
-
-                Relatórios e alguns gráficos
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-8">
-        <div class="card">
-            <div class="stat-widget-two">
-
-                Relatórios e alguns gráficos
-            </div>
-        </div>
-    </div>
-</div>
-<!-- /# row -->
-
-<div class="row">
-    <div class="col-lg-6">
-        <div class="card">
-            <div class="stat-widget-two">
-
-                Relatórios e alguns gráficos
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-6">
-        <div class="card">
-            <div class="stat-widget-two">
-
-                Relatórios e alguns gráficos
-            </div>
-        </div>
-    </div>
-</div>
-<!-- /# row -->
-
-<div class="row">
-    <div class="col-lg-4">
-        <div class="card">
-            <div class="stat-widget-two">
-
-                Relatórios e alguns gráficos
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-4">
-        <div class="card">
-            <div class="stat-widget-two">
-
-                Relatórios e alguns gráficos
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-4">
-        <div class="card">
-            <div class="stat-widget-two">
-
-                Relatórios e alguns gráficos
-            </div>
-        </div>
-    </div>
-</div>
-<!-- /# row -->
-
-<div class="row">
-    <div class="col-lg-12">
-        <div class="card">
-            <div class="stat-widget-two">
-
-                Relatórios e alguns gráficos
-            </div>
-        </div>
-    </div>    
-</div>
-<!-- /# row -->
+                    }
+                }]
+            }
+        }
+    });
+</script>
