@@ -33,7 +33,7 @@ namespace Locadora_Soares.Persistence
         {
             using (var conexao = new SqlConnection(connStr))
             {
-                String queryRead_All = "SELECT * FROM Filme ORDER BY ID";
+                String queryRead_All = "SELECT * FROM Filme ORDER BY NOME";
                 try
                 {
                     var result = conexao.Query<Filme>(queryRead_All);
@@ -73,7 +73,7 @@ namespace Locadora_Soares.Persistence
         {
             using (var conexao = new SqlConnection(connStr))
             {
-                String queryRead_Available = "SELECT * FROM Filme WHERE Disponivel = 1 ORDER BY ID";
+                String queryRead_Available = "SELECT * FROM Filme WHERE Disponivel = 1 ORDER BY NOME";
                 try
                 {
                     var result = conexao.Query<Filme>(queryRead_Available);

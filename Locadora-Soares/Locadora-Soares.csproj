@@ -148,6 +148,9 @@
     <Compile Include="Persistence\ClienteDAO.cs" />
     <Compile Include="Persistence\FilmeDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\FilmesAlugados.cs" />
+    <Compile Include="ViewModel\TopClienteLocacoes.cs" />
+    <Compile Include="ViewModel\TopFilmeLocacoes.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -526,6 +529,11 @@
     <Content Include="Views\Cliente\FilmesAlugados.cshtml" />
     <Content Include="Views\Cliente\AlugarFilme.cshtml" />
     <Content Include="Views\Cliente\EditarPerfilSucesso.cshtml" />
+    <Content Include="Views\Admin\RelatorioFilmesAlugados.cshtml" />
+    <Content Include="Views\Admin\RelatorioTopClientesLocadores.cshtml" />
+    <Content Include="Views\Admin\RelatorioTopFilmesAlugados.cshtml" />
+    <Content Include="Views\Admin\RelatorioUltimasDevolucoes.cshtml" />
+    <Content Include="Views\Admin\RelatorioUltimasLocacoes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

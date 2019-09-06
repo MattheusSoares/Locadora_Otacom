@@ -127,7 +127,7 @@ namespace Locadora_Soares.Controllers
 
             ViewBag.ID_Cliente = ID;
 
-            return View(alugaDAO.Read_Rented_by_Cliente(ID));
+            return View(alugaDAO.Read_Rented_by_Cliente_by_ID(ID));
         }
 
         public ActionResult ReturnCliente(int ID)

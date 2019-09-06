@@ -1,0 +1,74 @@
+﻿
+@{
+    ViewBag.Title = "RelatorioUltimasLocacoes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model IEnumerable<Locadora_Soares.ViewModel.FilmesAlugados>
+
+<div class="row">
+    <div class="col-lg-2">
+    </div>
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="stat-widget-two">
+                <h2 align="center">Últimos Filmes Alugados</h2>
+                <br /><br /><br />
+                <table class="table" style="text-align:center">
+                    <thead>
+                        <tr>
+                            <th style="text-align:center">
+                                Cliente
+                            </th>
+                            <th style="text-align:center">
+                                Filme
+                            </th>
+                            <th style="text-align:center">
+                                Horário
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (!Model.Any())
+                        {
+                            <tr>
+                                <td colspan="3" align="center">
+                                    Não existem filmes alugados
+                                </td>
+                            </tr>
+
+                        }
+                        else
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Cliente)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Filme)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Horario)
+                                    </td>
+
+                                </tr>
+                            }
+
+                        }
+                    </tbody>
+                </table>
+                <br /><br /><br />
+                <div align="center">
+                    <a role="button" class="btn btn-primary" href="/Admin/AdminMain/">
+                        Voltar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-2">
+    </div>
+</div>
+

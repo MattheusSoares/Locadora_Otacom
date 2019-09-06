@@ -57,16 +57,18 @@
                                             Editar
                                         </a>
                                     </td>
-                                    <td>
-                                        <a role="button" class="btn btn-outline-danger" href="/Admin/ExcluirFilme/@Html.DisplayFor(modelItem => item.ID)">
-                                            Excluir
-                                        </a>
-                                    </td>
-
 
                                     @{
                                         if (item.Disponivel == 1)
                                         {
+                                            <td>
+                                                <a role="button" class="btn btn-outline-danger" href="/Admin/ExcluirFilme/@Html.DisplayFor(modelItem => item.ID)">
+                                                    Excluir
+                                                </a>
+                                            </td>
+
+
+
                                             <td>
                                                 Não
                                             </td>
@@ -74,6 +76,18 @@
                                         else if (item.Disponivel == 2)
 
                                         {
+                                            <td>
+                                                <a role="button" class="btn btn-outline-danger" href="/Admin/ExcluirFilme/@Html.DisplayFor(modelItem => item.ID)">
+                                                    Excluir
+                                                </a>
+
+                                                <!-- Button trigger modal -->
+                                                @*<button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#Modal">
+            Excluir
+        </button>*@
+
+                                            </td>
+
                                             <td>
                                                 Sim
                                             </td>
@@ -87,6 +101,36 @@
                         }
                     </tbody>
                 </table>
+
+
+
+
+                <!-- Modal -->
+                <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="ModalLabel">AVISO!</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                É necessário primeiro devolver o filme antes de excluir o mesmo
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-info" data-dismiss="modal">Fechar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    $('#myModal').on('shown.bs.modal', function () {
+                        $('#myInput').trigger('focus')
+                    })
+                </script>
+
 
                 <br /><br /><br />
                 <div align="center">

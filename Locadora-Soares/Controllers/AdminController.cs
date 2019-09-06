@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Locadora_Soares.Models;
 using Locadora_Soares.Persistence;
+using Locadora_Soares.ViewModel;
 
 namespace Locadora_Soares.Persistence
 {
@@ -25,6 +26,7 @@ namespace Locadora_Soares.Persistence
 
             return View();
         }
+
         public ActionResult Login(string login, string senha)
         {
             Admin admin = new Admin(login,senha);
@@ -109,6 +111,7 @@ namespace Locadora_Soares.Persistence
             clienteDAO.Update(cliente);
             return RedirectToAction("EditarClienteSucesso", "Admin");
         }
+
         public ActionResult EditarClienteSucesso()
         {
             ViewBag.user_layout = "admin";
@@ -126,6 +129,16 @@ namespace Locadora_Soares.Persistence
             ViewBag.title = "Bem-vindo Administrador";
             ViewBag.session_status = "logado";
 
+
+
+            IEnumerable<Filme> filmes = alugaDAO.Read_Rented_by_Cliente_by_ID(ID);
+
+            foreach (var f in filmes)
+            {
+                filmeDAO.Update_to_Available(f.ID);
+            }
+
+            alugaDAO.Delete_Client(ID);
             clienteDAO.Delete(ID);
             return View();
         }
@@ -157,6 +170,7 @@ namespace Locadora_Soares.Persistence
 
             return View();
         }
+
         public ActionResult ListarFilme()
         {
             ViewBag.user_layout = "admin";
@@ -183,6 +197,7 @@ namespace Locadora_Soares.Persistence
             filmeDAO.Update(filme);
             return RedirectToAction("EditarFilmeSucesso", "Admin");
         }
+
         public ActionResult EditarFilmeSucesso()
         {
             ViewBag.user_layout = "admin";
@@ -200,6 +215,7 @@ namespace Locadora_Soares.Persistence
             ViewBag.title = "Bem-vindo Administrador";
             ViewBag.session_status = "logado";
 
+            alugaDAO.Delete_Movie(ID);   
             filmeDAO.Delete(ID);
             return View();
         }
@@ -214,10 +230,10 @@ namespace Locadora_Soares.Persistence
             Cliente cliente = clienteDAO.Read_By_ID(ID);
 
             ViewBag.ID_Cliente = cliente.ID;
-            return View(alugaDAO.Read_Rented_by_Cliente(ID));
+            return View(alugaDAO.Read_Rented_by_Cliente_by_ID(ID));
         }
  
-        //ALTERAR
+        
         public ActionResult DevolucaoFilme(int ID_Filme, int ID_Cliente)
         {
             ViewBag.user_layout = "admin";
@@ -234,6 +250,65 @@ namespace Locadora_Soares.Persistence
             return View();
         }
 
+        public ActionResult RelatorioFilmesAlugados()
+        {
+            ViewBag.user_layout = "admin";
+            ViewBag.title_welcome = "Olá, ";
+            ViewBag.title = "Bem-vindo Administrador";
+            ViewBag.session_status = "logado";
+
+            IEnumerable<FilmesAlugados> filmesAlugados = alugaDAO.Read_Rented_by_Cliente();
+
+            return View(filmesAlugados);
+        }
+
+        public ActionResult RelatorioTopClientesLocadores()
+        {
+            ViewBag.user_layout = "admin";
+            ViewBag.title_welcome = "Olá, ";
+            ViewBag.title = "Bem-vindo Administrador";
+            ViewBag.session_status = "logado";
+
+            IEnumerable<TopClienteLocacoes> topClienteLocacoes = alugaDAO.Read_Top_Client_Renters();
+
+            return View(topClienteLocacoes);
+        }
+
+        public ActionResult RelatorioTopFilmesAlugados()
+        {
+            ViewBag.user_layout = "admin";
+            ViewBag.title_welcome = "Olá, ";
+            ViewBag.title = "Bem-vindo Administrador";
+            ViewBag.session_status = "logado";
+
+            IEnumerable<TopFilmeLocacoes> topFilmeLocacoes = alugaDAO.Read_Top_Movies_Rented();
+
+            return View(topFilmeLocacoes);
+        }
+
+        public ActionResult RelatorioUltimasLocacoes()
+        {
+            ViewBag.user_layout = "admin";
+            ViewBag.title_welcome = "Olá, ";
+            ViewBag.title = "Bem-vindo Administrador";
+            ViewBag.session_status = "logado";
+
+            IEnumerable<FilmesAlugados> filmesAlugados = alugaDAO.Read_Last_Movies_Rented();
+
+            return View(filmesAlugados);
+        }
+
+        public ActionResult RelatorioUltimasDevolucoes()
+        {
+            ViewBag.user_layout = "admin";
+            ViewBag.title_welcome = "Olá, ";
+            ViewBag.title = "Bem-vindo Administrador";
+            ViewBag.session_status = "logado";
+
+            IEnumerable<FilmesAlugados> filmesAlugados = alugaDAO.Read_Last_Movies_Returned();
+
+            return View(filmesAlugados);
+        }
 
     }
 }

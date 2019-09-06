@@ -24,7 +24,8 @@ namespace Locadora_Soares.Models
             this.Senha = senha;
         }
 
-        public Cliente(int id, String nome, String login, String senha) {
+        public Cliente(int id, String nome, String login, String senha)
+        {
             this.ID = id;
             this.Nome = nome;
             this.Login = login;
