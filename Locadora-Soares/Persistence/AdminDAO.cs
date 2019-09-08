@@ -31,6 +31,7 @@ namespace Locadora_Soares.Persistence
         }
 
 
+        //private static readonly string connStr = @"Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=Locadora-Soares;Data Source=SOARESQS-PC\SQLEXPRESS;";
         private static readonly string connStr = @"Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=Locadora-Soares;Data Source=GENIPABU\SQL2014;user=sa;password=adm123***";
 
     }

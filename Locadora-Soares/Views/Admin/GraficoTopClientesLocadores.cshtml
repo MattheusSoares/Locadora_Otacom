@@ -1,0 +1,81 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <h5 align="center">Clientes Mais Locadores</h5>
+            <canvas id="myChart"></canvas>
+            <br /><br />
+            <div align="center">
+                <a role="button" class="btn btn-primary" href="/Admin/AdminMain/">
+                    Voltar
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /# row -->
+
+
+<script src="~/Content/template/assets/js/js_chart/node_modules/chart.js/dist/Chart.js"></script>
+
+<script type="text/javascript">
+    var lbls = @Html.Raw(Json.Encode(ViewBag.labels));
+    var values = @Html.Raw(Json.Encode(ViewBag.valores));
+
+    Chart.defaults.global.legend.display = false;
+
+    var ctx = document.getElementById('myChart');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: lbls,
+            datasets: [{
+                label: lbls,
+                data: values,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        stepSize: 1
+
+                    }
+                }],
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        stepSize: 1
+
+                    }
+                }]
+            }
+
+
+        }
+    });
+</script>
+
