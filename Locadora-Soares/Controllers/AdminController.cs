@@ -69,24 +69,12 @@ namespace Locadora_Soares.Persistence
             List<string> labels = new List<string>();
 
             foreach (var f in filmesMaisAlugados) {
-
-                //if (f.Filme.Count()>20)
-                //{
-                //    labels.Add(String.Concat(f.Filme.Substring(0, 17),"..."));
-                //}
-                //else
-                //{
-                    labels.Add(f.Filme);
-                //}
-
+                labels.Add(f.Filme);
                 valores.Add(f.Locacoes);
-
             }
 
             ViewBag.labels = labels;
-
             ViewBag.valores = valores;
-
 
             return View();
         }
@@ -341,6 +329,59 @@ namespace Locadora_Soares.Persistence
 
             return View(filmesAlugados);
         }
+
+
+
+        public ActionResult GraficoTopFilmesAlugados()
+        {
+            ViewBag.user_layout = "admin";
+            ViewBag.title_welcome = "Olá, ";
+            ViewBag.title = "Bem-vindo Administrador";
+            ViewBag.session_status = "logado";
+
+            IEnumerable<TopFilmeLocacoes> filmesMaisAlugados = alugaDAO.Read_Top_Movies_Rented();
+
+            List<int> valores = new List<int>();
+            List<string> labels = new List<string>();
+
+            foreach (var f in filmesMaisAlugados)
+            {
+                labels.Add(f.Filme);
+                valores.Add(f.Locacoes);
+            }
+
+            ViewBag.labels = labels;
+            ViewBag.valores = valores;
+
+            return View();
+        }
+
+
+        public ActionResult GraficoTopClientesLocadores()
+        {
+            ViewBag.user_layout = "admin";
+            ViewBag.title_welcome = "Olá, ";
+            ViewBag.title = "Bem-vindo Administrador";
+            ViewBag.session_status = "logado";
+
+            IEnumerable<TopClienteLocacoes> topClienteLocacoes = alugaDAO.Read_Top_Client_Renters();
+
+            List<int> valores = new List<int>();
+            List<string> labels = new List<string>();
+
+            foreach (var f in topClienteLocacoes)
+            {
+                labels.Add(f.Cliente);
+                valores.Add(f.Locacoes);
+            }
+
+            ViewBag.labels = labels;
+            ViewBag.valores = valores;
+
+            return View();
+        }
+
+
 
     }
 }

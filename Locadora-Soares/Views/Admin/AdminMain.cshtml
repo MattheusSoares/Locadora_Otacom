@@ -79,8 +79,9 @@
     <div class="col-lg-7">
         <div class="card">
             <h5 align="center">Filmes Mais Alugados</h5>
-            <canvas id="myChart"></canvas>
-
+            <!--Chart-->
+            <canvas id="myChart" height="600"></canvas>
+            <!--Chart-->
         </div>
     </div>
 </div>
@@ -89,27 +90,19 @@
 
 <script src="~/Content/template/assets/js/js_chart/node_modules/chart.js/dist/Chart.js"></script>
 
-<script>
+<script type="text/javascript">
+    var lbls = @Html.Raw(Json.Encode(ViewBag.labels));
+    var values = @Html.Raw(Json.Encode(ViewBag.valores));
+
+    Chart.defaults.global.legend.display = false;
+       
     var ctx = document.getElementById('myChart');
     var myChart = new Chart(ctx, {
-        type: 'horizontalBar',
+        type: 'bar',
         data: {
-            labels: [
-                @Html.Raw(Json.Encode(ViewBag.labels[0])),
-                @Html.Raw(Json.Encode(ViewBag.labels[1])),
-                @Html.Raw(Json.Encode(ViewBag.labels[2])),
-                @Html.Raw(Json.Encode(ViewBag.labels[3])),
-                @Html.Raw(Json.Encode(ViewBag.labels[4]))
-            ],
+            labels: lbls,
             datasets: [{
-                label: '',
-                data: [
-                    @ViewBag.valores[0],
-                    @ViewBag.valores[1],
-                    @ViewBag.valores[2],
-                    @ViewBag.valores[3],
-                    @ViewBag.valores[4]
-                ],
+                data: values,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
@@ -137,8 +130,17 @@
                         stepSize: 1
 
                     }
+                }],
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true,
+                        stepSize: 1
+
+                    }
                 }]
             }
         }
     });
 </script>
+
+

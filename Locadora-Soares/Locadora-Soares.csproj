@@ -945,6 +945,8 @@
     <Content Include="Views\Admin\RelatorioTopFilmesAlugados.cshtml" />
     <Content Include="Views\Admin\RelatorioUltimasDevolucoes.cshtml" />
     <Content Include="Views\Admin\RelatorioUltimasLocacoes.cshtml" />
+    <Content Include="Views\Admin\GraficoTopFilmesAlugados.cshtml" />
+    <Content Include="Views\Admin\GraficoTopClientesLocadores.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
